@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > CartController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.softwaretest.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: CartController (com.example.softwaretest.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CartController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.6%
+  </span>
+  <span class="absValue">
+    (1/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.softwaretest.controller;
+&nbsp;
+&nbsp;import com.example.softwaretest.entity.CartItem;
+&nbsp;import com.example.softwaretest.repository.CartRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class CartController {</b>
+&nbsp;    @Autowired
+&nbsp;    CartRepository cartRepository;
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/getCart&quot;)
+&nbsp;    @CrossOrigin
+&nbsp;    public List&lt;CartItem&gt; getCart(@RequestParam int userId){
+&nbsp;        List&lt;CartItem&gt; result;
+<b class="nc">&nbsp;        result=cartRepository.findByUserIdIs(userId);</b>
+<b class="nc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/addBookToCart&quot;)
+&nbsp;    @CrossOrigin
+&nbsp;    public void addBookToCart(@RequestParam int userId,@RequestParam int bookId){
+&nbsp;        List&lt;CartItem&gt; result;
+<b class="nc">&nbsp;        CartItem c = new CartItem(userId,bookId,1);</b>
+<b class="nc">&nbsp;        result=cartRepository.findByUserIdIs(userId);</b>
+<b class="nc">&nbsp;        for(CartItem cartItem : result){</b>
+<b class="nc">&nbsp;            if(cartItem.getBookId()==bookId){</b>
+<b class="nc">&nbsp;                cartItem.setNumber(cartItem.getNumber()+1);</b>
+<b class="nc">&nbsp;                c=cartItem;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        cartRepository.save(c);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/removeBookInCart&quot;)
+&nbsp;    @CrossOrigin
+&nbsp;    public void removeBookInCart(@RequestParam int userId,@RequestParam int bookId){
+&nbsp;        List&lt;CartItem&gt; cartItems;
+<b class="nc">&nbsp;        cartItems=cartRepository.findByUserIdIs(userId);</b>
+<b class="nc">&nbsp;        for(CartItem cartItem:cartItems){</b>
+<b class="nc">&nbsp;            if(cartItem.getBookId()==bookId){</b>
+<b class="nc">&nbsp;                cartRepository.delete(cartItem);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-05 02:18</div>
+</div>
+</body>
+</html>

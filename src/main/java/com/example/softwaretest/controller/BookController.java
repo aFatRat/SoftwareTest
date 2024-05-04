@@ -21,7 +21,6 @@ public class BookController {
     @RequestMapping("/getAllBooks")
     @CrossOrigin
     public List<Book> getAllBooks(){
-        ArrayList<Book> books;
         List<Book> result;
         result=bookRepository.findAll();
         return result;

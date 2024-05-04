@@ -1,3 +1,4 @@
+drop database if exists MyBookstore;
 create database if not exists MyBookstore;
 use MyBookstore;
 drop table if exists `orders`;
