@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    100%
   </span>
   <span class="absValue">
-    (1/4)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    4.5%
+    86.4%
   </span>
   <span class="absValue">
-    (1/22)
+    (19/22)
   </span>
 </td>
 </tr>
@@ -94,37 +94,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    CartDAO cartDAO;
 &nbsp;    @Override
 &nbsp;    public Cart getCart(int userId) {
-<b class="nc">&nbsp;        return cartDAO.findCartByUserId(userId);</b>
+<b class="fc">&nbsp;        return cartDAO.findCartByUserId(userId);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public void addBookToCart(int userId, int bookId) {
-<b class="nc">&nbsp;        Cart cart = cartDAO.findCartByUserId(userId);</b>
-<b class="nc">&nbsp;        int cartId = cart.getId();</b>
-<b class="nc">&nbsp;        List&lt;CartItem&gt; cartItems = cartDAO.findCartItemByCartId(cartId);</b>
-<b class="nc">&nbsp;        CartItem c = new CartItem(userId, bookId, 1);</b>
-<b class="nc">&nbsp;        for (CartItem cartItem : cartItems) {</b>
-<b class="nc">&nbsp;            if (cartItem.getBookId() == bookId) {</b>
+<b class="fc">&nbsp;        Cart cart = cartDAO.findCartByUserId(userId);</b>
+<b class="fc">&nbsp;        int cartId = cart.getId();</b>
+<b class="fc">&nbsp;        List&lt;CartItem&gt; cartItems = cartDAO.findCartItemByCartId(cartId);</b>
+<b class="fc">&nbsp;        CartItem c = new CartItem(userId, bookId, 1);</b>
+<b class="fc">&nbsp;        for (CartItem cartItem : cartItems) {</b>
+<b class="fc">&nbsp;            if (cartItem.getBookId() == bookId) {</b>
 <b class="nc">&nbsp;                cartItem.setNumber(cartItem.getNumber() + 1);</b>
 <b class="nc">&nbsp;                c = cartItem;</b>
 <b class="nc">&nbsp;                break;</b>
 &nbsp;            }
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        cartDAO.saveItem(c);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        cartDAO.saveItem(c);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public Cart removeBookInCart(int userId, int bookId) {
-<b class="nc">&nbsp;        Cart cart = cartDAO.findCartByUserId(userId);</b>
-<b class="nc">&nbsp;        int cartId = cart.getId();</b>
-<b class="nc">&nbsp;        List&lt;CartItem&gt; cartItems=cartDAO.findCartItemByCartId(cartId);</b>
-<b class="nc">&nbsp;        for (CartItem cartItem : cartItems) {</b>
-<b class="nc">&nbsp;            if (cartItem.getBookId() == bookId) {</b>
-<b class="nc">&nbsp;                cartDAO.deleteItem(cartItem);</b>
-<b class="nc">&nbsp;                break;</b>
+<b class="fc">&nbsp;        Cart cart = cartDAO.findCartByUserId(userId);</b>
+<b class="fc">&nbsp;        int cartId = cart.getId();</b>
+<b class="fc">&nbsp;        List&lt;CartItem&gt; cartItems=cartDAO.findCartItemByCartId(cartId);</b>
+<b class="fc">&nbsp;        for (CartItem cartItem : cartItems) {</b>
+<b class="fc">&nbsp;            if (cartItem.getBookId() == bookId) {</b>
+<b class="fc">&nbsp;                cartDAO.deleteItem(cartItem);</b>
+<b class="fc">&nbsp;                break;</b>
 &nbsp;            }
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return cartDAO.findCartByUserId(userId);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return cartDAO.findCartByUserId(userId);</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -150,7 +150,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-05 18:47</div>
+    <div style="float:right;">generated on 2024-05-05 20:35</div>
 </div>
 </body>
 </html>
