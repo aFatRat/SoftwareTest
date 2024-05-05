@@ -16,9 +16,13 @@ public class UserAuth {
     @Basic
     @Column(name = "password")
     private String password;
-    @Basic
-    @Column(name = "user_type")
-    private int userType;
+
+    public UserAuth(){};
+    public UserAuth(int userId,String username,String password,String userType){
+        this.userId=userId;
+        this.username=username;
+        this.password=password;
+    }
 
     public int getUserId() {
         return userId;
@@ -44,24 +48,16 @@ public class UserAuth {
         this.password = password;
     }
 
-    public int getUserType() {
-        return userType;
-    }
-
-    public void setUserType(int userType) {
-        this.userType = userType;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAuth userAuth = (UserAuth) o;
-        return userId == userAuth.userId && userType == userAuth.userType && Objects.equals(username, userAuth.username) && Objects.equals(password, userAuth.password);
+        return userId == userAuth.userId && Objects.equals(username, userAuth.username) && Objects.equals(password, userAuth.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, username, password, userType);
+        return Objects.hash(userId, username, password);
     }
 }

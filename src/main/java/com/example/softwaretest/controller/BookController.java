@@ -1,36 +1,46 @@
 package com.example.softwaretest.controller;
 
-
 import com.example.softwaretest.entity.Book;
-import com.example.softwaretest.repository.BookRepository;
+import com.example.softwaretest.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 public class BookController {
     @Autowired
-    BookRepository bookRepository;
+    BookService bookService;
 
     @RequestMapping("/getAllBooks")
     @CrossOrigin
     public List<Book> getAllBooks(){
-        List<Book> result;
-        result=bookRepository.findAll();
-        return result;
+        return bookService.getAllBooks();
     }
 
     @RequestMapping("/getBook")
     @CrossOrigin
-    public Optional<Book> getBook(@RequestParam Integer bookId){
-        Optional<Book> result;
-        result=bookRepository.findById(bookId);
-        return result;
+    public Book getBook(@RequestParam Integer bookId){
+        return bookService.getBook(bookId);
     }
+
+    @RequestMapping("/addBook")
+    @CrossOrigin
+    public String addBook(@RequestBody Map<String,String> params) throws ParseException {
+        return bookService.addBook(params);
+    }
+
+    @RequestMapping("/updateBook")
+    @CrossOrigin
+    public String updateBook(@RequestBody Map<String,String> params) throws ParseException {
+        return bookService.updateBook(params);
+    }
+
+//    @RequestMapping("/removeBook")
+//    @CrossOrigin
+//    public String removeBook(@RequestBody Book book){
+//        return bookService.removeBook(book);
+//    }
 }
