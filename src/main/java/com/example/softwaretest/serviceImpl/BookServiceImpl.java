@@ -65,7 +65,8 @@ public class BookServiceImpl implements BookService {
         String date=params.get("date");
         String author=params.get("author");
         Book tmp=bookDAO.findBookByNameAndAuthor(name,author);
-        if (tmp==null) return JSON.toJSONString("fail");
+        if (tmp==null)
+            return JSON.toJSONString("fail");
         tmp.setDate(java.sql.Date.valueOf(date));
         tmp.setDescription(description);
         tmp.setAvatar(avatar);

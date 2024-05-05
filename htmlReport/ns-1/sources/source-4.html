@@ -60,10 +60,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    14.3%
+    33.3%
   </span>
   <span class="absValue">
-    (1/7)
+    (1/3)
   </span>
 </td>
 </tr>
@@ -79,37 +79,27 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;import com.example.softwaretest.entity.User;
 &nbsp;import com.example.softwaretest.entity.UserAuth;
-&nbsp;import com.example.softwaretest.repository.UserAuthRepository;
-&nbsp;import com.example.softwaretest.repository.UserRepository;
+&nbsp;import com.example.softwaretest.service.UserService;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
 &nbsp;import org.springframework.web.bind.annotation.*;
 &nbsp;
-&nbsp;import java.util.Objects;
-&nbsp;import java.util.Optional;
+&nbsp;import java.util.Map;
 &nbsp;
 &nbsp;@RestController
 <b class="fc">&nbsp;public class UserController {</b>
 &nbsp;    @Autowired
-&nbsp;    UserRepository userRepository;
-&nbsp;    @Autowired
-&nbsp;    UserAuthRepository userAuthRepository;
+&nbsp;    UserService userService;
 &nbsp;
 &nbsp;    @RequestMapping(&quot;/login&quot;)
 &nbsp;    @CrossOrigin
-&nbsp;    public int login(@RequestParam String username,@RequestParam String password){
-&nbsp;        Optional&lt;UserAuth&gt; result;
-<b class="nc">&nbsp;        result=userAuthRepository.findUserAuthByUsernameIs(username);</b>
-<b class="nc">&nbsp;        if(result.filter(userAuth -&gt; (Objects.equals(password, userAuth.getPassword()))).isPresent())</b>
-<b class="nc">&nbsp;            return result.get().getUserId();</b>
-<b class="nc">&nbsp;        else return 0;</b>
+&nbsp;    public UserAuth login(@RequestBody Map&lt;String, String&gt; params) {
+<b class="nc">&nbsp;        return userService.login(params);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @RequestMapping(&quot;/getUser&quot;)
 &nbsp;    @CrossOrigin
-&nbsp;    public Optional&lt;User&gt; getUser(@RequestParam int userId){
-&nbsp;        Optional&lt;User&gt; result;
-<b class="nc">&nbsp;        result=userRepository.findById(userId);</b>
-<b class="nc">&nbsp;        return result;</b>
+&nbsp;    public User getUser(@RequestBody Map&lt;String, String&gt; params) {
+<b class="nc">&nbsp;        return userService.getUserByUsernameAndPassword(params);</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -135,7 +125,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-05 02:18</div>
+    <div style="float:right;">generated on 2024-05-05 18:47</div>
 </div>
 </body>
 </html>

@@ -55,7 +55,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (3/3)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -77,39 +77,49 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.example.softwaretest.controller;
 &nbsp;
-&nbsp;
 &nbsp;import com.example.softwaretest.entity.Book;
-&nbsp;import com.example.softwaretest.repository.BookRepository;
+&nbsp;import com.example.softwaretest.service.BookService;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
-&nbsp;import org.springframework.web.bind.annotation.CrossOrigin;
-&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
-&nbsp;import org.springframework.web.bind.annotation.RequestParam;
-&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;import org.springframework.web.bind.annotation.*;
 &nbsp;
-&nbsp;import java.util.ArrayList;
+&nbsp;import java.text.ParseException;
 &nbsp;import java.util.List;
-&nbsp;import java.util.Optional;
+&nbsp;import java.util.Map;
 &nbsp;
 &nbsp;@RestController
 <b class="fc">&nbsp;public class BookController {</b>
 &nbsp;    @Autowired
-&nbsp;    BookRepository bookRepository;
+&nbsp;    BookService bookService;
 &nbsp;
 &nbsp;    @RequestMapping(&quot;/getAllBooks&quot;)
 &nbsp;    @CrossOrigin
 &nbsp;    public List&lt;Book&gt; getAllBooks(){
-&nbsp;        List&lt;Book&gt; result;
-<b class="fc">&nbsp;        result=bookRepository.findAll();</b>
-<b class="fc">&nbsp;        return result;</b>
+<b class="fc">&nbsp;        return bookService.getAllBooks();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @RequestMapping(&quot;/getBook&quot;)
 &nbsp;    @CrossOrigin
-&nbsp;    public Optional&lt;Book&gt; getBook(@RequestParam Integer bookId){
-&nbsp;        Optional&lt;Book&gt; result;
-<b class="fc">&nbsp;        result=bookRepository.findById(bookId);</b>
-<b class="fc">&nbsp;        return result;</b>
+&nbsp;    public Book getBook(@RequestParam Integer bookId){
+<b class="fc">&nbsp;        return bookService.getBook(bookId);</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/addBook&quot;)
+&nbsp;    @CrossOrigin
+&nbsp;    public String addBook(@RequestBody Map&lt;String,String&gt; params) throws ParseException {
+<b class="fc">&nbsp;        return bookService.addBook(params);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @RequestMapping(&quot;/updateBook&quot;)
+&nbsp;    @CrossOrigin
+&nbsp;    public String updateBook(@RequestBody Map&lt;String,String&gt; params) throws ParseException {
+<b class="fc">&nbsp;        return bookService.updateBook(params);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;//    @RequestMapping(&quot;/removeBook&quot;)
+&nbsp;//    @CrossOrigin
+&nbsp;//    public String removeBook(@RequestBody Book book){
+&nbsp;//        return bookService.removeBook(book);
+&nbsp;//    }
 &nbsp;}
 </code>
 </pre>
@@ -134,7 +144,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-05 02:18</div>
+    <div style="float:right;">generated on 2024-05-05 18:47</div>
 </div>
 </body>
 </html>
